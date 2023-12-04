@@ -1,34 +1,37 @@
 ---
-about:
-  template: jolla
-  id: about-block
-  image: "img/my_image.jpg"
-  links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/CharleyGaber
-    - icon: github
-      text: Github
-      href: https://github.com/cegepi
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/charles-gaber-phd-mph-4b02bb87/
-    - icon: envelope
-      text: Email
-      href: "mailto:gaber1@uic.edu"  
+title: "About"
+pagetitle: "Chales Gaber"
+main-photo: img/Charles Gaber photograph.jpg
+main-photo-square: img/Charles Gaber photograph.jpg
+title-block-banner: "#D50032"
+format:
+  html:
+    quarto-template-params:
+      banner-header-class: "home"
 ---
+::: {.grid}
 
-::: {#about-block}
-:::
-
-# Welcome to my website!
-
-I am Charley Gaber. Assistant Professor in the Department of Pharmacy Systems, Outcomes, and Policy (PSOP) and a member of the Center for Pharmacoepidemiology and Pharmacoeconomic Research (CPR). My applied research focuses on the use and effectiveness of cancer-directed therapies in older adults diagnosed with poor prognosis malignancies. Recent projects have focused on evaluating the comparative effectiveness of treatments for digestive diseases and esophageal cancer using secondary data from claims databases and registries. I seek to generate robust evidence from observational data by harnessing modern causal inference study design and analysis strategies, such as the target-trial emulation approach. Methodologically, I have explored how to increase the utility of statistical estimators for recurrent events when working with non-experimental data. Future work will examine heterogenous treatment effects of cancer treatments using predictive modeling. I am an active member of the International Society for Pharmacoepidemiology (ISPE), Society of Epidemiologic Research (SER), and the American Society of Clinical Oncology (ASCO).
-
+::: {.g-col-12 .g-col-sm-4}
 
 ```{=html}
-<div  style="margin: 30px; text-align: center;">
-<a class="btn btn-primary" href="https://www.marvinschmitt.com/blog/website-tutorial-quarto/" role="button" target="_blank" style="padding: 15px 30px;">View the tutorial for this template (+ download link)</a>
+<div class="grid" style="--bs-columns: 5; row-gap: 0;">
+  <div class="g-col-1 g-col-sm-0"></div>
+  <div class="g-col-3 g-col-sm-5">
+    <picture>
+      <source media="(max-width: 576px)" srcset="{{< meta main-photo-square >}}">
+      <source media="(min-width: 576px)" srcset="{{< meta main-photo >}}">
+      <img class="img-fluid" src="{{< meta main-photo >}}" alt="{{< meta author-meta >}}">
+    </picture>
+  </div>
+  <div class="g-col-1 g-col-sm-0"></div>
 </div>
 ```
 
+:::
+
+::: {.g-col-12 .g-col-sm-8}
+
+My name is Charley Gaber. I am an Assistant Professor in the Department of Pharmacy Systems, Outcomes, and Policy (PSOP) and a member of the Center for Pharmacoepidemiology and Pharmacoeconomic Research (CPR). My applied research focuses on the use and effectiveness of cancer-directed therapies in older adults diagnosed with poor prognosis malignancies. I seek to generate robust evidence from observational data by harnessing modern causal inference study design and analysis strategies, such as the target-trial emulation approach. Methodologically, I have explored how to increase the utility of statistical estimators for recurrent events when working with non-experimental data. Future work will examine heterogenous treatment effects of cancer treatments using predictive modeling. I am an active member of the International Society for Pharmacoepidemiology (ISPE), Society of Epidemiologic Research (SER), and the American Society of Clinical Oncology (ASCO).
+:::
+
+:::
