@@ -2,7 +2,7 @@
 
 # website settings
 website:
-  title: "Charley Gaber"                                # Your name
+  title: "Charles Gaber"                                # Your name
   description: "Assistant Professor at University of Illinois-Chicago"   # A brief slogan (optional)
   image: img/Charles Gaber photograph.jpg
   
@@ -17,9 +17,12 @@ website:
         href: "index.qmd"
       - text: "CV"
         href: cv/index.qmd
+      - posts.qmd 
     
     # your social media handles
     right:
+      - icon: github
+        href: https://cegepi.github.io/
       - icon: twitter
         href: https://twitter.com/CharleyGaber/
       - icon: linkedin
