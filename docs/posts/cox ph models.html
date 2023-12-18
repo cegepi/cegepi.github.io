@@ -175,6 +175,7 @@ div.csl-indent {
 
 
 
+<p><img src="images/5e9ca7991ceb3e38d760a91a_Hazard+Signs.jpg" class="img-fluid" width="320"></p>
 <p>The topic of this post is the Cox Propotional Hazards (PH) regression model, the most commonly implemented technique for analzying survival data in epidemiologic research.</p>
 <p>The Cox PH model is a <em>semiparametric</em> method–as it contains both non-parametric and parametric components. In this model, the hazard of the outcome is modeled as a function of a baseline hazard function, h<sub>0</sub>(t) and covariates. The <strong>hazard</strong> is the instantaneous event rate at time t conditional on still being event free before t. The baseline hazard is estimated from the data without assuming that it follows any specific statistical distribution–this is the part of the Cox model that is non-parametric. The parametric part comes in with how we model the effects of the covariates on the hazard. The covariates act multiplicatively on the hazard, raising or lowering it proportionately.<span class="citation" data-cites="bradburn2003 stel2011"><sup><a href="#ref-bradburn2003" role="doc-biblioref">1</a>,<a href="#ref-stel2011" role="doc-biblioref">2</a></sup></span> So if your X<sub>1</sub> variable is binary and X<sub>1</sub>=1 represents treatment (vs.&nbsp;no treatment, X<sub>1</sub>=0), this model assumes the hazard in the treated group is a ratio–that is constant over time– of the untreated group’s hazard.</p>
 <section id="the-model" class="level2">
@@ -187,7 +188,7 @@ div.csl-indent {
 <p><span class="math display">\[
 h(t) = h_0(t) \cdot e^{(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}
 \]</span></p>
-<p>A nice thing about the multiplicative scale is it lets use see that the hazard ratio for a a given covariate <em>p</em> is just e<sup>β<sub>p</sub></sup>. Also, because e<sup>0</sup> = 1.0, we see that when all covariate values are set to 0, h(t) reduces to the baseline hazard (because we are multiplying the baseline hazard by 1.0).</p>
+<p>A nice thing about the multiplicative scale is it lets us easily see that the hazard ratio for a given covariate <em>p</em> is just e<sup>β<sub>p</sub></sup>. Also, because e<sup>0</sup> = 1.0, we see that when all covariate values are set to 0, h(t) reduces to the baseline hazard (because we are multiplying the baseline hazard by 1.0).</p>
 <p>Remember, we write h(t) on the left of the equation, not just “hazard”, because the hazard can (and almost always does) vary over time, t. The model is not that different from a multiple linear regression of the log hazard on your suite of predictor variables, with the baseline hazard essentially serving as a time-varying intercept.</p>
 </section>
 <section id="interpreting-coefficients" class="level2">
@@ -204,8 +205,8 @@ h(t) = h_0(t) \cdot e^{(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}
 <li>Implement a time-dependent-coefficient form of a variable that is suspected to not meet the assumption. If this term is significant it would be hinting that non-proportionality has been detected.</li>
 </ul>
 </section>
-<section id="accomodating-non-proportional-hazards" class="level4">
-<h4 class="anchored" data-anchor-id="accomodating-non-proportional-hazards">Accomodating non-proportional hazards</h4>
+<section id="accommodating-non-proportional-hazards" class="level4">
+<h4 class="anchored" data-anchor-id="accommodating-non-proportional-hazards">Accommodating non-proportional hazards</h4>
 <p>There are a couple of solutions when you have non-proportionality.</p>
 <ul>
 <li>Include an interaction term with the offending variable and time.</li>

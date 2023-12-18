@@ -7,6 +7,8 @@ bibliography: references.bib
 csl: jama.csl
 ---
 
+![](images/5e9ca7991ceb3e38d760a91a_Hazard+Signs.jpg){width="320"}
+
 The topic of this post is the Cox Propotional Hazards (PH) regression model, the most commonly implemented technique for analzying survival data in epidemiologic research.
 
 The Cox PH model is a *semiparametric* method--as it contains both non-parametric and parametric components. In this model, the hazard of the outcome is modeled as a function of a baseline hazard function, h~0~(t) and covariates. The **hazard** is the instantaneous event rate at time t conditional on still being event free before t. The baseline hazard is estimated from the data without assuming that it follows any specific statistical distribution--this is the part of the Cox model that is non-parametric. The parametric part comes in with how we model the effects of the covariates on the hazard. The covariates act multiplicatively on the hazard, raising or lowering it proportionately.[@bradburn2003; @stel2011] So if your X~1~ variable is binary and X~1~=1 represents treatment (vs. no treatment, X~1~=0), this model assumes the hazard in the treated group is a ratio--that is constant over time-- of the untreated group's hazard.
@@ -25,7 +27,7 @@ $$
 h(t) = h_0(t) \cdot e^{(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}
 $$
 
-A nice thing about the multiplicative scale is it lets use see that the hazard ratio for a a given covariate *p* is just e^β~p~^. Also, because e^0^ = 1.0, we see that when all covariate values are set to 0, h(t) reduces to the baseline hazard (because we are multiplying the baseline hazard by 1.0).
+A nice thing about the multiplicative scale is it lets us easily see that the hazard ratio for a given covariate *p* is just e^β~p~^. Also, because e^0^ = 1.0, we see that when all covariate values are set to 0, h(t) reduces to the baseline hazard (because we are multiplying the baseline hazard by 1.0).
 
 Remember, we write h(t) on the left of the equation, not just "hazard", because the hazard can (and almost always does) vary over time, t. The model is not that different from a multiple linear regression of the log hazard on your suite of predictor variables, with the baseline hazard essentially serving as a time-varying intercept.
 
@@ -42,7 +44,7 @@ An implication of the hazard of one group being a fixed multiple of another is t
 -   If a PH assumption is valid, the plot of log(H(t)) against the log(t) should contain parallel lines. This is called a log-minus-log-surival plot.
 -   Implement a time-dependent-coefficient form of a variable that is suspected to not meet the assumption. If this term is significant it would be hinting that non-proportionality has been detected.
 
-#### Accomodating non-proportional hazards
+#### Accommodating non-proportional hazards
 
 There are a couple of solutions when you have non-proportionality.
 
