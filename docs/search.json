@@ -4,7 +4,14 @@
     "href": "posts.html",
     "title": "Pharmacoepi Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Cox Proportional Hazards Models\n\n\n\n\n\n\nCharles Gaber\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "Hello! My name is Charley Gaber. I am an Assistant Professor in the Department of Pharmacy Systems, Outcomes & and Policy (PSOP) in the College of Pharmacy at the University of Illinois-Chicago. My applied research focuses on characterizing the use, effectiveness, and safety of cancer-directed therapies in older adults diagnosed with advanced malignancies of the esophagus, pancreas, and prostate. I seek to generate robust evidence from observational data by harnessing modern causal inference study design and analysis strategies, such as the target-trial emulation approach. Methodologically, I have explored how to increase the utility of statistical estimators for recurrent events when working with non-experimental data."
   },
   {
     "objectID": "cv/index.html",
@@ -14,10 +21,45 @@
     "text": "Download current CV"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "About",
+    "objectID": "posts/cox ph models.html",
+    "href": "posts/cox ph models.html",
+    "title": "Cox Proportional Hazards Models",
     "section": "",
-    "text": "Hello! My name is Charley Gaber. I am an Assistant Professor in the Department of Pharmacy Systems, Outcomes & and Policy (PSOP) in the College of Pharmacy at the University of Illinois-Chicago. My applied research focuses on characterizing the use, effectiveness, and safety of cancer-directed therapies in older adults diagnosed with advanced malignancies of the esophagus, pancreas, and prostate. I seek to generate robust evidence from observational data by harnessing modern causal inference study design and analysis strategies, such as the target-trial emulation approach. Methodologically, I have explored how to increase the utility of statistical estimators for recurrent events when working with non-experimental data."
+    "text": "The topic of this post is the Cox Propotional Hazards (PH) regression model, the most commonly implemented technique for analzying survival data in epidemiologic research.\nThe Cox PH model is a semiparametric method–as it contains both non-parametric and parametric components. In this model, the hazard of the outcome is modeled as a function of a baseline hazard function, h0(t) and covariates. The hazard is the instantaneous event rate at time t conditional on still being event free before t. The baseline hazard is estimated from the data without assuming that it follows any specific statistical distribution–this is the part of the Cox model that is non-parametric. The parametric part comes in with how we model the effects of the covariates on the hazard. The covariates act multiplicatively on the hazard, raising or lowering it proportionately.1,2 So if your X1 variable is binary and X1=1 represents treatment (vs. no treatment, X1=0), this model assumes the hazard in the treated group is a ratio–that is constant over time– of the untreated group’s hazard."
+  },
+  {
+    "objectID": "posts/cox ph models.html#the-model",
+    "href": "posts/cox ph models.html#the-model",
+    "title": "Cox Proportional Hazards Models",
+    "section": "The Model",
+    "text": "The Model\nThe model can be written on the log scale (“additive format”) as:\n\\[\n\\log(h(t)) = \\log(h_0(t)) + (\\beta_1 X_1 + \\beta_2 X_2 + \\dots + \\beta_p X_p)\n\\] On the log scale, you can see that there is a constant difference in hazard for X1= 1 versus X1= 0. This difference is represented by the coefficient β1\nTypically though, the Cox model is expressed on the multiplicative scale:\n\\[\nh(t) = h_0(t) \\cdot e^{(\\beta_1 X_1 + \\beta_2 X_2 + \\dots + \\beta_p X_p)}\n\\]\nA nice thing about the multiplicative scale is it lets use see that the hazard ratio for a a given covariate p is just eβp. Also, because e0 = 1.0, we see that when all covariate values are set to 0, h(t) reduces to the baseline hazard (because we are multiplying the baseline hazard by 1.0).\nRemember, we write h(t) on the left of the equation, not just “hazard”, because the hazard can (and almost always does) vary over time, t. The model is not that different from a multiple linear regression of the log hazard on your suite of predictor variables, with the baseline hazard essentially serving as a time-varying intercept."
+  },
+  {
+    "objectID": "posts/cox ph models.html#interpreting-coefficients",
+    "href": "posts/cox ph models.html#interpreting-coefficients",
+    "title": "Cox Proportional Hazards Models",
+    "section": "Interpreting Coefficients",
+    "text": "Interpreting Coefficients\nWhen the model is fit to the data, the baseline hazard and model parameters are estimated. A value of βp &gt; 0 (equivalently: HR&gt;1.0), means that for a unit increase in the variable p, the hazard of the outcome increases and thus the length of survival (time before outcome) decreases. A value of βp &lt; 0 (equivalently: HR&lt;1.0), means that for a unit increase in the variable p, the hazard of the outcome decreases and thus the length of survival (time before outcome) increases."
+  },
+  {
+    "objectID": "posts/cox ph models.html#proportional-hazards",
+    "href": "posts/cox ph models.html#proportional-hazards",
+    "title": "Cox Proportional Hazards Models",
+    "section": "Proportional Hazards",
+    "text": "Proportional Hazards\nAn implication of the hazard of one group being a fixed multiple of another is that they cannot cross. This may or may not be an appropriate assumption for a given application. There are several ways to test this assumption.\n\nTesting the PH assumption\n\nIf a PH assumption is valid, the plot of log(H(t)) against the log(t) should contain parallel lines. This is called a log-minus-log-surival plot.\nImplement a time-dependent-coefficient form of a variable that is suspected to not meet the assumption. If this term is significant it would be hinting that non-proportionality has been detected.\n\n\n\nAccomodating non-proportional hazards\nThere are a couple of solutions when you have non-proportionality.\n\nInclude an interaction term with the offending variable and time.\nDo a stratified Cox model where analysis is stratified on the non-proportional variable before being statistically recombined. Note that if you do this, you cannot interpret effects for the stratified variable because there is no longer a term for it in the model; so this is probably best for variables where you do not need to interpret an effect (e.g., confounders)."
+  },
+  {
+    "objectID": "posts/cox ph models.html#mathematical-relationships-between-hazard-and-survival",
+    "href": "posts/cox ph models.html#mathematical-relationships-between-hazard-and-survival",
+    "title": "Cox Proportional Hazards Models",
+    "section": "Mathematical relationships between hazard and survival",
+    "text": "Mathematical relationships between hazard and survival\nSometimes it is handy to have the mathematical relationships between hazards, HRs, and survival in mind. Here are some useful ones:\nThe hazard at time t is the negative derivative of the log of survival at time t:\n\\[\nh(t) = -\\frac{d}{dt}\\log(S(t))\n\\]\nCumulative hazard, H(t), is defined as the integral of the hazard, or the area under the hazard function between times 0 and t, and differs from the log-survivor curve only by sign, that is:\n\\[\nH(t) = -\\log[S(t)]\n\\]\nThe Hazard Ratio at any given time point can be expressed as3: \\[\n  \\mathrm{HR}_t = \\frac{{\\log\\left(\\hat{S}^{(z=1)}(t)\\right)}}{{\\log\\left(\\hat{S}^{(z=0)}(t)\\right)}}\n\\]"
+  },
+  {
+    "objectID": "posts/cox ph models.html#problems-with-the-hazard-ratio",
+    "href": "posts/cox ph models.html#problems-with-the-hazard-ratio",
+    "title": "Cox Proportional Hazards Models",
+    "section": "Problems with the Hazard Ratio",
+    "text": "Problems with the Hazard Ratio\nOne of the largest issues with the HR is its low interpretability. It’s easy enough to know the rules of HR &gt; 1.0 means the chance of the outcome is increased., HR &lt; 1.0 means reduction in the chance of the outcome…but when it comes to deriving clinical meaning from the magnitude of the estimate, it gets fuzzier. Take a HR of 2.0, for example. What does this mean? The instantaneous event rate, even if it changes over time, was 2.0 times higher in the treated group than the untreated group throughout all of follow-up? It’s much easier to communicate risks (expressed as percentages) along with risk differences or risk ratios. Additionally, HRs are not collapsible and will vary depending on the length of follow-up.4 Alternative choices for HRs including risks and restricted mean survival time will be the subject of a future post! 😊\n\n\n\n\n\n\nCaution!\n\n\n\n\nDo not interpret a HR as a risk ratio, they are not the same thing!\nCritical to check the proportionality assumption via statistical tests and graphical diagnostics"
   }
 ]

@@ -1,0 +1,81 @@
+---
+title: "Cox Proportional Hazards Models"
+author: Charles Gaber
+format: html
+editor: visual
+bibliography: references.bib
+csl: jama.csl
+---
+
+The topic of this post is the Cox Propotional Hazards (PH) regression model, the most commonly implemented technique for analzying survival data in epidemiologic research.
+
+The Cox PH model is a *semiparametric* method--as it contains both non-parametric and parametric components. In this model, the hazard of the outcome is modeled as a function of a baseline hazard function, h~0~(t) and covariates. The **hazard** is the instantaneous event rate at time t conditional on still being event free before t. The baseline hazard is estimated from the data without assuming that it follows any specific statistical distribution--this is the part of the Cox model that is non-parametric. The parametric part comes in with how we model the effects of the covariates on the hazard. The covariates act multiplicatively on the hazard, raising or lowering it proportionately.[@bradburn2003; @stel2011] So if your X~1~ variable is binary and X~1~=1 represents treatment (vs. no treatment, X~1~=0), this model assumes the hazard in the treated group is a ratio--that is constant over time-- of the untreated group's hazard.
+
+## The Model
+
+The model can be written on the log scale ("additive format") as:
+
+$$
+\log(h(t)) = \log(h_0(t)) + (\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)
+$$ On the log scale, you can see that there is a constant difference in hazard for X~1~= 1 versus X~1~= 0. This difference is represented by the coefficient β~1~
+
+Typically though, the Cox model is expressed on the multiplicative scale:
+
+$$
+h(t) = h_0(t) \cdot e^{(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)}
+$$
+
+A nice thing about the multiplicative scale is it lets use see that the hazard ratio for a a given covariate *p* is just e^β~p~^. Also, because e^0^ = 1.0, we see that when all covariate values are set to 0, h(t) reduces to the baseline hazard (because we are multiplying the baseline hazard by 1.0).
+
+Remember, we write h(t) on the left of the equation, not just "hazard", because the hazard can (and almost always does) vary over time, t. The model is not that different from a multiple linear regression of the log hazard on your suite of predictor variables, with the baseline hazard essentially serving as a time-varying intercept.
+
+## Interpreting Coefficients
+
+When the model is fit to the data, the baseline hazard and model parameters are estimated. A value of β~p~ \> 0 (equivalently: HR\>1.0), means that for a unit increase in the variable p, the hazard of the outcome *increases* and thus the length of survival (time before outcome) *decreases*. A value of β~p~ \< 0 (equivalently: HR\<1.0), means that for a unit increase in the variable p, the hazard of the outcome *decreases* and thus the length of survival (time before outcome) *increases*.
+
+## Proportional Hazards
+
+An implication of the hazard of one group being a fixed multiple of another is that they cannot cross. This may or may not be an appropriate assumption for a given application. There are several ways to test this assumption.
+
+#### Testing the PH assumption
+
+-   If a PH assumption is valid, the plot of log(H(t)) against the log(t) should contain parallel lines. This is called a log-minus-log-surival plot.
+-   Implement a time-dependent-coefficient form of a variable that is suspected to not meet the assumption. If this term is significant it would be hinting that non-proportionality has been detected.
+
+#### Accomodating non-proportional hazards
+
+There are a couple of solutions when you have non-proportionality.
+
+-   Include an interaction term with the offending variable and time.
+-   Do a stratified Cox model where analysis is stratified on the non-proportional variable before being statistically recombined. Note that if you do this, you cannot interpret effects for the stratified variable because there is no longer a term for it in the model; so this is probably best for variables where you do not need to interpret an effect (e.g., confounders).
+
+## Mathematical relationships between hazard and survival
+
+Sometimes it is handy to have the mathematical relationships between hazards, HRs, and survival in mind. Here are some useful ones:
+
+The hazard at time t is the negative derivative of the log of survival at time t:
+
+$$
+h(t) = -\frac{d}{dt}\log(S(t))
+$$
+
+**Cumulative hazard**, H(t), is defined as the integral of the hazard, or the area under the hazard function between times 0 and t, and differs from the log-survivor curve only by sign, that is:
+
+$$
+H(t) = -\log[S(t)]
+$$
+
+The Hazard Ratio at any given time point can be expressed as[@murray2021]: $$
+  \mathrm{HR}_t = \frac{{\log\left(\hat{S}^{(z=1)}(t)\right)}}{{\log\left(\hat{S}^{(z=0)}(t)\right)}}
+$$
+
+## Problems with the Hazard Ratio
+
+One of the largest issues with the HR is its low interpretability. It's easy enough to know the rules of HR \> 1.0 means the chance of the outcome is increased., HR \< 1.0 means reduction in the chance of the outcome...but when it comes to deriving clinical meaning from the magnitude of the estimate, it gets fuzzier. Take a HR of 2.0, for example. What does this mean? The instantaneous event rate, even if it changes over time, was 2.0 times higher in the treated group than the untreated group throughout all of follow-up? It's much easier to communicate risks (expressed as percentages) along with risk differences or risk ratios. Additionally, HRs are not collapsible and will vary depending on the length of follow-up.[@hernán2010] Alternative choices for HRs including risks and restricted mean survival time will be the subject of a future post! 😊
+
+::: callout-important
+## Caution!
+
+-   Do not interpret a HR as a risk ratio, they are not the same thing!
+-   Critical to check the proportionality assumption via statistical tests and graphical diagnostics
+:::
