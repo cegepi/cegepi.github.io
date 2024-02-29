@@ -1,8 +1,8 @@
 ---
 title: "About"
 pagetitle: "Charles Gaber"
-main-photo: img/Charles Gaber photograph.jpg
-main-photo-square: img/Charles Gaber photograph.jpg
+main-photo: img/B29A5314.jpg
+main-photo-square: img/B29A5314.jpg
 title-block-banner: "#D50032"
 format:
   html:
