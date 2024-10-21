@@ -31,7 +31,7 @@ format:
 
 ::: {.g-col-12 .g-col-sm-8}
 
-Hello! My name is Charley Gaber. I am an Assistant Professor in the [**Department of Pharmacy Systems, Outcomes & and Policy (PSOP)**](https://psop.pharmacy.uic.edu/) in the [**College of Pharmacy**](https://pharmacy.uic.edu/) at the [**University of Illinois-Chicago**](https://www.uic.edu/). My applied research focuses on characterizing the use, effectiveness, and safety of cancer-directed therapies in older adults diagnosed with advanced malignancies of the esophagus, pancreas, and prostate. I seek to generate robust evidence from observational data by harnessing modern causal inference study design and analysis strategies, such as the target-trial emulation approach. Methodologically, I have explored how to increase the utility of statistical estimators for recurrent events when working with non-experimental data. 
+Hello! My name is Charley Gaber. I am an Assistant Professor in the [**Department of Pharmacy Systems, Outcomes & and Policy (PSOP)**](https://psop.pharmacy.uic.edu/) in the [**Retzky College of Pharmacy**](https://pharmacy.uic.edu/) at the [**University of Illinois-Chicago**](https://www.uic.edu/). My applied research focuses on characterizing the use, effectiveness, and safety of cancer-directed therapies in older adults diagnosed with advanced malignancies of the esophagus, pancreas, and prostate. I seek to generate robust evidence from observational data by harnessing modern causal inference study design and analysis strategies, such as the target-trial emulation approach. Methodologically, I have explored how to increase the utility of statistical estimators for recurrent events when working with non-experimental data. 
 :::
 
 :::

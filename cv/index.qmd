@@ -1,7 +1,7 @@
 ---
 title: Curriculum vitæ
 description: "Charles Gaber's CV"
-date: 2024-02-29
+date: 2024-10-21
 title-block-banner: "#D50032"
 published-title: CV last updated
 engine: knitr 
